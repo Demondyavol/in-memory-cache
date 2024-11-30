@@ -9,7 +9,7 @@ func Main() {
 
 func New() *cache {
 	return &cache{
-		make(map[string]interface{}),
+		memory: make(map[string]interface{}),
 	}
 }
 
