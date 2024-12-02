@@ -1,4 +1,4 @@
-package main
+package inMemoryCache
 
 type cache struct {
 	memory map[string]interface{}
@@ -17,19 +17,14 @@ func (c *cache) Set(key string, value interface{}) {
 	c.memory[key] = value
 }
 
-func (c *cache) Get(key string) (string, interface{}, bool) {
+func (c *cache) Get(key string) interface{} {
 	val, exist := c.memory[key]
 	if !exist {
-		return "Not found", nil, false
+		return "Not found"
 	}
-	return key, val, true
+	return val
 }
 
-func (c *cache) Delete(key string) (string, interface{}) {
-	if value, exist := c.memory[key]; !exist {
-		return "Nothing delete", nil
-	} else {
-		delete(c.memory, key)
-		return key + "was deleted", value
-	}
+func (c *cache) Delete(key string) {
+	delete(c.memory, key)
 }
